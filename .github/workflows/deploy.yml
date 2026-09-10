@@ -29,11 +29,14 @@ jobs:
         with:
           node-version: 22
           cache: npm
+          cache-dependency-path: momentum/package-lock.json
 
       - name: Install dependencies
+        working-directory: momentum
         run: npm ci
 
       - name: Build
+        working-directory: momentum
         run: npm run build
 
       - name: Setup Pages
@@ -42,7 +45,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          path: './dist'
+          path: './momentum/dist'
 
       - name: Deploy to GitHub Pages
         id: deployment
